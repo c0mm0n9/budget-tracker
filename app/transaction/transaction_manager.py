@@ -1,8 +1,12 @@
 from app.storage.transaction_model import TransactionModel
+from app.config import Config
+from app.storage.csv_handler import read_csv
 
 class TransactionManager:
     def __init__(self):
-        self.transactions = []
+        self.transactions: list[TransactionModel] = []
+        self.config = Config()
+        self.transactions = read_csv(self.config.TRANSACTION_FILE)
 
     def create_transaction(self, transaction: TransactionModel) -> TransactionModel:
         self.transactions.append(transaction)

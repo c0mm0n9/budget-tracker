@@ -32,17 +32,13 @@ def average_this_month(transactions: list[TransactionModel]) -> float:
     """
     Calculate the average spending this month.
     """
-    transactions_this_month = transactions_this_month(transactions)
-    return sum(
-        transaction.amount for transaction in transactions_this_month
-    ) / len(transactions_this_month)
+    month_txs = transactions_this_month(transactions)
+    return sum(transaction.amount for transaction in month_txs) / len(month_txs)
 
 
 def average_this_week(transactions: list[TransactionModel]) -> float:
     """
     Calculate the average spending this week.
     """
-    transactions_this_week = transactions_this_week(transactions)   
-    return sum(
-        transaction.amount for transaction in transactions_this_week
-    ) / len(transactions_this_week)
+    week_txs = transactions_this_week(transactions)
+    return sum(transaction.amount for transaction in week_txs) / len(week_txs)

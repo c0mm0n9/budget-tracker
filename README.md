@@ -1,4 +1,62 @@
- ```mermaid 
+# BudgetTrackeer
+
+A desktop budget tracking app built with Python and PyQt6.
+
+## Requirements
+
+- Python 3.10+ (3.11 recommended)
+- `pip`
+
+## Setup
+
+1. Create and activate a virtual environment.
+2. Install dependencies from `requirements.txt`.
+
+### Windows (PowerShell)
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+### macOS/Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Run the app
+
+From the project root:
+
+```powershell
+python -m app.ui
+```
+
+## Run tests
+
+From the project root:
+
+```powershell
+python -m unittest discover -s tests
+```
+
+## Data/config notes
+
+- By default, data files are created in the `data/` folder.
+- You can override file paths with environment variables in a `.env` file:
+  - `DATA_DIR`
+  - `BUDGET_FILE`
+  - `TRANSACTION_FILE`
+  - `NOTIFICATION_RULE_FILE`
+  - `NOTIFICATION_FILE`
+
+## Architecture
+
+```mermaid 
  graph TD
     subgraph UI["UI Layer"]
         CLI["CLI Menu<br/>User commands"]

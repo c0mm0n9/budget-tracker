@@ -26,6 +26,30 @@ python -m app.agent.mcp_server --transport streamable-http
 python -m app.agent.mcp_server --transport sse
 ```
 
+## Example client configuration
+
+For a local stdio-based MCP client, point it at the project root and use:
+
+```json
+{
+  "mcpServers": {
+    "budget-tracker": {
+      "command": "C:\\Users\\huang\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "args": ["-m", "app.agent.mcp_server"],
+      "cwd": "C:\\Users\\huang\\OneDrive\\HKU\\Year 1 Sem 2\\COMP1110\\Group Project\\Codex on COMP1110"
+    }
+  }
+}
+```
+
+If your client expects a streamable HTTP endpoint, run:
+
+```powershell
+python -m app.agent.mcp_server --transport streamable-http
+```
+
+Then connect the client to the corresponding local URL exposed by the server.
+
 ## Available MCP resources
 
 Resources are for reading state without changing it.
@@ -34,6 +58,9 @@ Resources are for reading state without changing it.
 - `budgettracker://transactions`
 - `budgettracker://budgets`
 - `budgettracker://rules`
+- `budgettracker://transactions/{transaction_id}`
+- `budgettracker://budgets/{budget_id}`
+- `budgettracker://rules/{rule_id}`
 
 ## Available MCP tools
 
@@ -56,6 +83,22 @@ Tools are for actions and lookups.
 - `delete_rule`
 - `get_summary`
 - `get_notifications`
+
+## Suggested agent workflow
+
+When an agent first connects, it should:
+
+1. Read `budgettracker://summary`.
+2. Open the resource that matches the user request.
+3. Use `get_*` tools for one record.
+4. Use `list_*` tools for full collections.
+5. Use `create_*`, `update_*`, and `delete_*` only after confirming the exact change.
+
+Useful prompts:
+
+- `onboarding_prompt`
+- `investigation_prompt`
+- `mutation_prompt`
 
 ## For AI agents
 
@@ -93,3 +136,4 @@ If you just want to use the project locally:
 - Data is stored in CSV files under `data/` by default.
 - You can override file locations with environment variables in `.env`.
 - The MCP server shares the same underlying storage and business logic as the GUI, CLI, and API.
+- The MCP server also exposes resource templates for one-item reads, which makes agent follow-up requests cleaner and cheaper.

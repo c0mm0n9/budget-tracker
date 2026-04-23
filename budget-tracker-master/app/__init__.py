@@ -1,0 +1,1 @@
+"""BudgetTracker application package."""

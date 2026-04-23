@@ -1,0 +1,4 @@
+pydantic>=2.0
+python-dotenv>=1.0
+PyQt6>=6.5
+PyQt6-Charts>=6.5

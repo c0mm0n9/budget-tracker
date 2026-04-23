@@ -57,6 +57,8 @@ uvicorn app.agent.api:app --reload
 python -m app.agent.mcp_server
 ```
 
+See [MCP.md](./MCP.md) for the full agent and user integration guide.
+
 ## Run tests
 
 From the project root:

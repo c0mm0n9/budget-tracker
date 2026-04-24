@@ -36,6 +36,29 @@ From the project root:
 python -m app.ui
 ```
 
+## Agent-friendly entry points
+
+### CLI
+
+```powershell
+python -m app.agent transactions list
+python -m app.agent stats summary
+```
+
+### HTTP API
+
+```powershell
+uvicorn app.agent.api:app --reload
+```
+
+### MCP server
+
+```powershell
+python -m app.agent.mcp_server
+```
+
+See [MCP.md](./MCP.md) for the full agent and user integration guide.
+
 ## Run tests
 
 From the project root:

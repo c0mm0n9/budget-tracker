@@ -50,6 +50,7 @@ class BudgetManager:
                 self.budgets.pop(i)
                 self.save_budgets()
                 return True
+        return False
 
     def get_all_budgets(self) -> list[BudgetModel]:
         return self.budgets

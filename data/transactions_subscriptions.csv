@@ -1,0 +1,7 @@
+id,timestamp,date,description,category,amount,currency,account,tag
+201,1711939200,2026-04-01,Spotify Premium,Subscription,58.0,HKD,CreditCard,expense
+202,1712025600,2026-04-02,Netflix,Subscription,93.0,HKD,CreditCard,expense
+203,1712112000,2026-04-03,YouTube Premium,Subscription,68.0,HKD,CreditCard,expense
+204,1712716800,2026-04-10,iCloud Storage,Subscription,23.0,HKD,CreditCard,expense
+205,1713571200,2026-04-20,ChatGPT Plus,Subscription,158.0,HKD,CreditCard,expense
+

@@ -1,0 +1,6 @@
+id,timestamp,date,description,category,amount,currency,account,tag
+301,1713004800,2026-04-13,Movie night,Entertainment,95.0,HKD,Cash,expense
+302,1713012000,2026-04-13,Popcorn + drink,Entertainment,48.0,HKD,Cash,expense
+303,1713098400,2026-04-14,Arcade games,Entertainment,120.0,HKD,Octopus,expense
+304,1713692400,2026-04-21,Concert ticket,Entertainment,280.0,HKD,CreditCard,expense
+305,1713778800,2026-04-22,Bar night,Entertainment,160.0,HKD,CreditCard,expense

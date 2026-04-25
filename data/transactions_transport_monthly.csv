@@ -1,0 +1,7 @@
+id,timestamp,date,description,category,amount,currency,account,tag
+101,1711939200,2026-04-01,MTR to work,Transport,14.5,HKD,Octopus,expense
+102,1712025600,2026-04-02,Bus to Central,Transport,5.0,HKD,Octopus,expense
+103,1712284800,2026-04-05,Taxi to Mong Kok,Transport,82.0,HKD,Cash,expense
+104,1712716800,2026-04-10,MTR return trip,Transport,29.0,HKD,Octopus,expense
+105,1713571200,2026-04-20,Uber to airport,Transport,250.0,HKD,CreditCard,expense
+106,1713744000,2026-04-22,Bus home,Transport,5.0,HKD,Octopus,expense

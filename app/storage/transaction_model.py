@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class TransactionModel(BaseModel):
     id: int
@@ -6,4 +7,6 @@ class TransactionModel(BaseModel):
     category: str
     amount: float
     tag: str
+
+    linked_budget: Optional[str] = None
     

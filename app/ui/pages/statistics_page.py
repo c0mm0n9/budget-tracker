@@ -225,8 +225,11 @@ class StatisticsPage(QWidget):
         chart = QChart()
         chart.legend().setVisible(True)
         chart.legend().setAlignment(Qt.AlignmentFlag.AlignRight)
+        chart.legend().setLabelColor(Qt.GlobalColor.black)
+        from PyQt6.QtGui import QColor, QBrush
+        chart.setBackgroundBrush(QBrush(QColor("#FFFFFF")))
+        chart.setBackgroundVisible(True)
         chart.addSeries(series)
-        chart.setBackgroundVisible(False)
         self._income_cat_chart_view.setChart(chart)
 
     def _refresh_expense_category_chart(self) -> None:
@@ -246,6 +249,11 @@ class StatisticsPage(QWidget):
         chart = QChart()
         chart.legend().setVisible(True)
         chart.legend().setAlignment(Qt.AlignmentFlag.AlignRight)
+        chart.legend().setLabelColor(Qt.GlobalColor.white) 
+
+        from PyQt6.QtGui import QColor, QBrush
+        chart.setBackgroundBrush(QBrush(QColor("#1e1e1e"))) 
+        chart.setBackgroundVisible(True)
+
         chart.addSeries(series)
-        chart.setBackgroundVisible(False)
         self._expense_cat_chart_view.setChart(chart)

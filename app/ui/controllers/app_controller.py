@@ -94,31 +94,25 @@ class AppController:
     def spending_trend_last_weeks(
         self, weeks: int = 6, now: datetime | None = None
     ) -> Tuple[List[str], List[float]]:
-        """
-        Weekly totals for the last `weeks` weeks.
-
-        Week starts on Monday (local date).
-        """
         now = now or datetime.now()
         today = now.date()
-        monday_this_week = today - timedelta(days=today.weekday())
-        week_starts = [
-            monday_this_week - timedelta(weeks=i)
-            for i in range(weeks - 1, -1, -1)
-        ]
+        
+        date_list = [today - timedelta(days=i) for i in range(29, -1, -1)]
 
         totals: list[float] = []
         labels: list[str] = []
         all_txs = self.transactions_manager.get_all_transactions()
-        for ws in week_starts:
-            we = ws + timedelta(days=7)
-            total = 0.0
+        
+        for target_date in date_list:
+            day_total = 0.0
             for tx in all_txs:
-                d = datetime.fromtimestamp(tx.timestamp).date()
-                if ws <= d < we:
-                    total += float(tx.amount)
-            totals.append(total)
-            labels.append(ws.strftime("%b %d"))
+                tx_date = datetime.fromtimestamp(tx.timestamp).date()
+                amount = float(tx.amount)
+                if tx_date == target_date and amount < 0:
+                    day_total += abs(amount)
+            
+            totals.append(day_total)
+            labels.append(target_date.strftime("%m-%d"))
 
         return labels, totals
 
@@ -127,25 +121,23 @@ class AppController:
     ) -> Tuple[List[str], List[float]]:
         now = now or datetime.now()
         today = now.date()
-        monday_this_week = today - timedelta(days=today.weekday())
-        week_starts = [
-            monday_this_week - timedelta(weeks=i)
-            for i in range(weeks - 1, -1, -1)
-        ]
+        
+        date_list = [today - timedelta(days=i) for i in range(29, -1, -1)]
 
         totals: list[float] = []
         labels: list[str] = []
         all_txs = self.transactions_manager.get_all_transactions()
-        for ws in week_starts:
-            we = ws + timedelta(days=7)
-            total = 0.0
+        
+        for target_date in date_list:
+            day_total = 0.0
             for tx in all_txs:
-                d = datetime.fromtimestamp(tx.timestamp).date()
+                tx_date = datetime.fromtimestamp(tx.timestamp).date()
                 amount = float(tx.amount)
-                if ws <= d < we and amount > 0:
-                    total += amount
-            totals.append(total)
-            labels.append(ws.strftime("%b %d"))
+                if tx_date == target_date and amount > 0:
+                    day_total += amount
+            
+            totals.append(day_total)
+            labels.append(target_date.strftime("%m-%d"))
 
         return labels, totals
 
@@ -165,8 +157,11 @@ class AppController:
             for tx in all_txs:
                 tx_date = datetime.fromtimestamp(tx.timestamp).date()
                 amount = float(tx.amount)
-                if budget.start.date() <= tx_date <= budget.end.date() and amount < 0:
+                if (budget.start.date() <= tx_date <= budget.end.date() and 
+                    amount < 0 and 
+                    getattr(tx, 'linked_budget', None) == budget.name):
                     spent += abs(amount)
+                    
             limit = float(budget.amount)
             usages.append((budget.name, spent, limit))
         return usages
@@ -270,4 +265,3 @@ class AppController:
         days_in_month = (next_m - start_of_month).days
         weeks = max(1, (days_in_month + 6) // 7)
         return total / weeks
-

@@ -71,3 +71,9 @@ class TransactionManager:
             transaction for transaction in self.transactions 
             if transaction.tag == tag
         ]   
+    def get_transactions_by_budget(self, budget_name: str) -> list[TransactionModel]:
+        
+        return [
+            t for t in self.transactions 
+            if getattr(t, 'linked_budget', None) == budget_name
+        ]
